@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "JIRA Velocity Chart Completion Rate",
+  "description": "Shows completion rate in JIRA velocity chart.",
+  "version": "0.1.0",
+
+  "permissions": [
+    "http://*/*RapidBoard.jspa*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*RapidBoard.jspa*"],
+      "js": ["app.js"]
+    }
+  ],
+  "web_accessible_resources": ["jira-velocity-chart-completion-rate.user.js"]
+}
