@@ -6,7 +6,7 @@
 // @updateURL    https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/script/jira-velocity-chart-completion-rate.user.js
 // @downloadURL  https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/script/jira-velocity-chart-completion-rate.user.js
 // @author       Suyeol Jeon (xoul.kr)
-// @match        http://jira.stylesha.re/secure/RapidBoard.jspa?rapidView=7&view=reporting&chart=velocityChart
+// @match        http://*/*RapidBoard.jspa*
 // @grant        none
 // ==/UserScript==
 
