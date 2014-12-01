@@ -9,7 +9,16 @@ Shows completion rate in JIRA velocity chart.
 Installation
 ------------
 
-First,  install a plugin that enables UserScript on a web browser. These are plugins for each web browsers:
+### Chrome Extension
+
+[![Available in the chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/jira-velocity-chart-compl/fkjcdhefbcpnakpfjejaognpcicmkgbk)
+
+Safari & Firfox extensions are not supported, yet.
+
+
+### User Script
+
+Install a plugin that enables UserScript on a web browser. These are plugins for each web browsers:
 
 - Chrome: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 - Firefox: [Greasemonkey](https://addons.mozilla.org/ko/firefox/addon/greasemonkey/)
