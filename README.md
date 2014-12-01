@@ -1,6 +1,8 @@
 JIRA Velocity Chart Completion Rate
 ===================================
 
+[![Release](http://img.shields.io/github/release/devxoul/jira-velocity-chart-completion-rate.svg)](https://github.com/devxoul/jira-velocity-chart-completion-rate/releases)
+
 Shows completion rate in JIRA velocity chart.
 
 ![screenshot](https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/screenshot/screenshot.png)
