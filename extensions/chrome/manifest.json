@@ -3,7 +3,7 @@
 
   "name": "JIRA Velocity Chart Completion Rate",
   "description": "Shows completion rate in JIRA velocity chart.",
-  "version": "0.1.0",
+  "version": "0.1.1",
 
   "permissions": [
     "http://*/*RapidBoard.jspa*"
