@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JIRA Velocity Chart Completion Rate
 // @namespace    http://jira-velocity-chart-completion-rate.xoul.kr
-// @version      0.1.0
+// @version      0.1.1
 // @description  Display completion rate at JIRA velocity chart.
 // @updateURL    https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/script/jira-velocity-chart-completion-rate.user.js
 // @downloadURL  https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/script/jira-velocity-chart-completion-rate.user.js
@@ -50,23 +50,29 @@ GH.VelocityChartView.showVelocityChart = function(data) {
             rate: (100 * completed / estimated).toFixed(1)
         };
     });
-    var f = [
+    var values = [
         {
             label: "Commitment",
-            data: estimatedValues
+            data: estimatedValues,
+            yaxis: 1,
         },
         {
             label: "Completed",
-            data: completedValues
+            data: completedValues,
+            yaxis: 1,
         },
         {
             label: "Rate",
-            data: rateValues
+            data: rateValues,
+            yaxis: 2,
+            lines: {  
+                lineWidth: 3
+            }
         }
     ];
     GH.ChartView.hideSpinner();
     var h = GH.VelocityChartController.rapidViewConfig.estimationStatistic;
-    var g = GH.Chart.draw(GH.BurndownChartController.id, GH.ChartView.getChartView(true), f, {
+    var g = GH.Chart.draw(GH.BurndownChartController.id, GH.ChartView.getChartView(true), values, {
         series: {
             bars: {
                 show: true,
@@ -75,9 +81,6 @@ GH.VelocityChartView.showVelocityChart = function(data) {
                 lineWidth: 0,
                 fillColor: {
                     colors: [
-                        {
-                            opacity: 1
-                        },
                         {
                             opacity: 1
                         },
@@ -94,7 +97,16 @@ GH.VelocityChartView.showVelocityChart = function(data) {
             min: -0.5,
             max: 6.5
         },
-        yaxis: GH.FlotChartUtils.calculateYAxis(maxValue, h),
+        yaxes: [
+            GH.FlotChartUtils.calculateYAxis(maxValue, h),
+            {
+                max: 100,
+                min: 0,
+                position: "right",
+                tickFormatter: function (b,c){return b.toFixed(0)},
+                tickSize: 10
+            }
+        ],
         legend: {
             container: null,
             position: "se"
