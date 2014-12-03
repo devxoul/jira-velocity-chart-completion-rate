@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JIRA Velocity Chart Completion Rate
 // @namespace    http://jira-velocity-chart-completion-rate.xoul.kr
-// @version      0.1.0
+// @version      0.1.1
 // @description  Display completion rate at JIRA velocity chart.
 // @updateURL    https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/script/jira-velocity-chart-completion-rate.user.js
 // @downloadURL  https://github.com/devxoul/jira-velocity-chart-completion-rate/raw/master/script/jira-velocity-chart-completion-rate.user.js
@@ -50,7 +50,7 @@ GH.VelocityChartView.showVelocityChart = function(data) {
             rate: (100 * completed / estimated).toFixed(1)
         };
     });
-    var f = [
+    var values = [
         {
             label: "Commitment",
             data: estimatedValues
@@ -61,12 +61,26 @@ GH.VelocityChartView.showVelocityChart = function(data) {
         },
         {
             label: "Rate",
-            data: rateValues
+            data: rateValues,
+            yaxis: 2,
+            bars: {
+                show: false
+            },
+            lines: {
+                show: true,
+                lineWidth: 3
+            },
+            points: {
+                show: true
+            }
         }
     ];
     GH.ChartView.hideSpinner();
     var h = GH.VelocityChartController.rapidViewConfig.estimationStatistic;
-    var g = GH.Chart.draw(GH.BurndownChartController.id, GH.ChartView.getChartView(true), f, {
+
+    var chartId = GH.BurndownChartController.id;
+    var chartView = GH.ChartView.getChartView(true);
+    var options = {
         series: {
             bars: {
                 show: true,
@@ -80,27 +94,34 @@ GH.VelocityChartView.showVelocityChart = function(data) {
                         },
                         {
                             opacity: 1
-                        },
-                        {
-                            opacity: 1
                         }
                     ]
                 }
             }
         },
-        colors: ["#ccc", "#14892c", "#3b73af"],
+        colors: ["#ccc", "#14892c"],
         xaxis: {
             ticks: sprintNames,
             min: -0.5,
             max: 6.5
         },
-        yaxis: GH.FlotChartUtils.calculateYAxis(maxValue, h),
+        yaxes: [
+            GH.FlotChartUtils.calculateYAxis(maxValue, h),
+            {
+                max: 100,
+                min: 0,
+                position: "right",
+                tickFormatter: function (b,c){return b.toFixed(0)},
+                tickSize: 10
+            }
+        ],
         legend: {
             container: null,
-            position: "se"
+            position: "ne"
         },
         multiplebars: true
-    });
+    };
+    var chart = GH.Chart.draw(chartId, chartView, values, options);
     var k = AJS.$(GH.tpl.velocity.renderVelocityChartTable({
         rows: rows,
         rapidBoardId: GH.RapidViewConfig.currentData.id
