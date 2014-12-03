@@ -117,7 +117,7 @@ GH.VelocityChartView.showVelocityChart = function(data) {
         ],
         legend: {
             container: null,
-            position: "se"
+            position: "ne"
         },
         multiplebars: true
     };
