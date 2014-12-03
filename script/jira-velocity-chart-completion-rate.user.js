@@ -53,26 +53,34 @@ GH.VelocityChartView.showVelocityChart = function(data) {
     var values = [
         {
             label: "Commitment",
-            data: estimatedValues,
-            yaxis: 1,
+            data: estimatedValues
         },
         {
             label: "Completed",
-            data: completedValues,
-            yaxis: 1,
+            data: completedValues
         },
         {
             label: "Rate",
             data: rateValues,
             yaxis: 2,
-            lines: {  
+            bars: {
+                show: false
+            },
+            lines: {
+                show: true,
                 lineWidth: 3
+            },
+            points: {
+                show: true
             }
         }
     ];
     GH.ChartView.hideSpinner();
     var h = GH.VelocityChartController.rapidViewConfig.estimationStatistic;
-    var g = GH.Chart.draw(GH.BurndownChartController.id, GH.ChartView.getChartView(true), values, {
+
+    var chartId = GH.BurndownChartController.id;
+    var chartView = GH.ChartView.getChartView(true);
+    var options = {
         series: {
             bars: {
                 show: true,
@@ -91,7 +99,7 @@ GH.VelocityChartView.showVelocityChart = function(data) {
                 }
             }
         },
-        colors: ["#ccc", "#14892c", "#3b73af"],
+        colors: ["#ccc", "#14892c"],
         xaxis: {
             ticks: sprintNames,
             min: -0.5,
@@ -112,7 +120,8 @@ GH.VelocityChartView.showVelocityChart = function(data) {
             position: "se"
         },
         multiplebars: true
-    });
+    };
+    var chart = GH.Chart.draw(chartId, chartView, values, options);
     var k = AJS.$(GH.tpl.velocity.renderVelocityChartTable({
         rows: rows,
         rapidBoardId: GH.RapidViewConfig.currentData.id
